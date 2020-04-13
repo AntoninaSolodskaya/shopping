@@ -6,7 +6,6 @@ export const styles = makeStyles(theme => ({
         justifyContent: "space-between",
         backgroundColor: theme.palette.primary.main,
         width: "100%",
-        padding: "20px 5px",
         '& .MuiPaper-elevation4': {
             boxShadow: "none",
         },

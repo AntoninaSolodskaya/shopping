@@ -24,8 +24,9 @@ const Header = () => {
         <>
             <div className={classes.bar}>
                 <Link href="/">
-                    <a className={classes.linkStyle}>Shopping</a>
+                    <a className={classes.linkStyle}>Shopping &#128064;</a>
                 </Link>
+
                 <Nav/>
             </div>
             <div>

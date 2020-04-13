@@ -1,5 +1,5 @@
 # source: https://eu1.prisma.sh/mailstonya-4ed873/shopping/dev
-# timestamp: Sun Apr 12 2020 22:33:17 GMT+0300 (Eastern European Summer Time)
+# timestamp: Mon Apr 13 2020 17:40:09 GMT+0300 (Eastern European Summer Time)
 
 type AggregateItem {
   count: Int!
@@ -21,6 +21,7 @@ type Item implements Node {
   image: String
   largeImage: String
   price: Int!
+  amount: Int
 }
 
 """A connection to a list of items."""
@@ -40,6 +41,7 @@ input ItemCreateInput {
   image: String
   largeImage: String
   price: Int!
+  amount: Int
 }
 
 """An edge in a connection."""
@@ -64,6 +66,8 @@ enum ItemOrderByInput {
   largeImage_DESC
   price_ASC
   price_DESC
+  amount_ASC
+  amount_DESC
 }
 
 type ItemPreviousValues {
@@ -73,6 +77,7 @@ type ItemPreviousValues {
   image: String
   largeImage: String
   price: Int!
+  amount: Int
 }
 
 type ItemSubscriptionPayload {
@@ -118,6 +123,7 @@ input ItemUpdateInput {
   image: String
   largeImage: String
   price: Int
+  amount: Int
 }
 
 input ItemUpdateManyMutationInput {
@@ -126,6 +132,7 @@ input ItemUpdateManyMutationInput {
   image: String
   largeImage: String
   price: Int
+  amount: Int
 }
 
 input ItemWhereInput {
@@ -359,6 +366,28 @@ input ItemWhereInput {
 
   """All values greater than or equal the given value."""
   price_gte: Int
+  amount: Int
+
+  """All values that are not equal to given value."""
+  amount_not: Int
+
+  """All values that are contained in given list."""
+  amount_in: [Int!]
+
+  """All values that are not contained in given list."""
+  amount_not_in: [Int!]
+
+  """All values less than the given value."""
+  amount_lt: Int
+
+  """All values less than or equal the given value."""
+  amount_lte: Int
+
+  """All values greater than the given value."""
+  amount_gt: Int
+
+  """All values greater than or equal the given value."""
+  amount_gte: Int
 }
 
 input ItemWhereUniqueInput {
