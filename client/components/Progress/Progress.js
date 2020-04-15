@@ -27,7 +27,6 @@ const LinearDeterminate = () => {
     return (
         <div className={classes.root}>
             <LinearProgress variant="determinate" value={completed} />
-            <LinearProgress variant="determinate" value={completed} color="secondary" />
         </div>
     );
 }

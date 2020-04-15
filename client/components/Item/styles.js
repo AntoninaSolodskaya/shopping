@@ -3,6 +3,7 @@ import { makeStyles } from "@material-ui/core/styles";
 export const styles = makeStyles(theme => ({
     root: {
         maxWidth: 450,
+        flexGrow: 1,
     },
     media: {
         height: 300,

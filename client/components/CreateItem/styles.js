@@ -26,10 +26,18 @@ export const styles = makeStyles(theme => ({
     margin: {
         margin: 10,
     },
+    marginInput: {
+       marginTop: 20,
+    },
     inputWrap: {
         flexGrow: 1,
         display: "flex",
         justifyContent: "space-between",
         paddingLeft: 10,
-    }
+    },
+    btnWrap: {
+        display: "flex",
+        justifyContent: "space-between",
+        margin: 20,
+    },
 }));
