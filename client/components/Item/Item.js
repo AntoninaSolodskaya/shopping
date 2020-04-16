@@ -2,7 +2,6 @@ import React from "react";
 import Link from 'next/link';
 import PropTypes from 'prop-types';
 
-import Card from '@material-ui/core/Card';
 import CardActions from '@material-ui/core/CardActions';
 import CardMedia from '@material-ui/core/CardMedia';
 import Button from '@material-ui/core/Button';
@@ -11,6 +10,7 @@ import Paper from "@material-ui/core/Paper";
 
 import {styles} from "./styles";
 import formatMoney from '../../lib/formatMoney';
+import DeleteItem from "../DeleteItem/DeleteItem";
 
 
 const Item = ({item}) => {
@@ -42,7 +42,7 @@ const Item = ({item}) => {
                 <Button size="small" color="primary">
                     <Link
                         href={{
-                            pathname: 'update',
+                            pathname: '/update',
                             query: {id: item.id},
                         }}
                     >
@@ -52,9 +52,7 @@ const Item = ({item}) => {
                 <Button size="small" color="primary">
                     Add To Cart
                 </Button>
-                <Button size="small" color="primary">
-                    Delete This Item
-                </Button>
+                <DeleteItem id={item.id} />
             </CardActions>
         </Paper>
     )

@@ -1,9 +1,9 @@
-import React, {useEffect} from "react";
+import React from "react";
 import gql from 'graphql-tag';
 import {useMutation} from '@apollo/react-hooks';
 import Router from 'next/router';
-import {Formik, Field, Form, useFormik} from "formik";
-import {TextField} from "formik-material-ui";
+import { Formik, Field, Form } from "formik";
+import { TextField } from "formik-material-ui";
 import * as Yup from "yup";
 import Paper from "@material-ui/core/Paper";
 import Button from "@material-ui/core/Button";
@@ -53,39 +53,31 @@ const CreateItem = () => {
                         description: "",
                         price: "",
                         amount: "",
-                        image: "",
-                        files: []
+                        file: [],
                     }}
                     validationSchema={Yup.object().shape({
                         title: Yup.string().required("Title is required"),
                         description: Yup.string().required("Description is required"),
                         price: Yup.string().required("Price is required"),
                         amount: Yup.string().required("Amount is required"),
-                        image: Yup.string().required("Image is required"),
+                        //TODO validate image
                     })}
                     onSubmit={async (values, {resetForm}) => {
-
                         const res = await createItem({
                             variables: {
-                                ...values
+                                ...values,
+                                image: state.image,
+                                largeImage: state.largeImage,
                             }
                         });
-
-                        console.log("res", res)
 
                         resetForm();
                         await Router.push({
                             pathname: '/item',
                             query: {id: res.data.createItem.id},
                         });
-                    }}
-                    render={({values, setFieldValue}) => {
-                        useEffect(
-                            () => {
-                                setState({...values, image: state.image})
-                            },
-                            [values, setState],
-                        );
+                    }}>
+                    {({values, setFieldValue, isSubmitting, isValid}) => {
 
                         const uploadFile = async event => {
                             const files = event.currentTarget.files;
@@ -159,16 +151,22 @@ const CreateItem = () => {
                                         <img width="200" src={state.image} alt="Upload Preview"/>
                                     )}
                                 </Box>
-                                <Button type="submit" variant="outlined" color="primary">
-                                    Register
-                                </Button>
-                                <Button type="reset" variant="outlined" color="secondary">
-                                    Reset
-                                </Button>
+                                <div className={classes.btnWrap}>
+                                    <Button
+                                        type="reset"
+                                        variant="contained"
+                                        color="secondary"
+                                        disabled={values.title === ""}
+                                    >
+                                        Reset
+                                    </Button>
+                                    <Button type="submit" variant="contained" color="primary" disabled={!isValid || values.title === ""} >
+                                        Submit
+                                    </Button>
+                                </div>
                             </Form>
                         )
                     }}
-                >
                 </Formik>
             </Paper>
         </div>
