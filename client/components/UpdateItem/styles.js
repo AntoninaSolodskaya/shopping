@@ -21,7 +21,7 @@ export const styles = makeStyles(theme => ({
         position: "relative",
         zIndex: 2,
         transform: "skew(-9deg)",
-        marginLeft: "2rem",
+        margin: 20,
     },
     margin: {
         margin: 10,

@@ -1,6 +1,6 @@
-import React, {useEffect, useState} from "react";
+import React, { useState } from "react";
 import gql from 'graphql-tag';
-import {useMutation, useQuery} from '@apollo/react-hooks';
+import { useMutation, useQuery } from '@apollo/react-hooks';
 
 import TextField from "@material-ui/core/TextField";
 import Paper from "@material-ui/core/Paper";
@@ -12,8 +12,8 @@ import Error from '../ErrorMessage';
 import Progress from "../Progress/Progress";
 
 const SINGLE_ITEM_QUERY = gql`
-    query SINGLE_ITEM_QUERY($id: ID!){
-        item(where: { id: $id}) {
+    query SINGLE_ITEM_QUERY($id: ID!) {
+        item(where: { id: $id }) {
             id
             title
             description
@@ -35,13 +35,13 @@ const UPDATE_ITEM_MUTATION = gql`
     }
 `;
 
-const UpdateItem = ({id}) => {
+const UpdateItem = ({ id }) => {
     const classes = styles();
+    const { data } = useQuery(SINGLE_ITEM_QUERY, {
+        variables: { id: id },
+    });
     const [state, setState] = useState({});
     const [updateItem, {loading, error}] = useMutation(UPDATE_ITEM_MUTATION);
-    const {data} = useQuery(SINGLE_ITEM_QUERY, {
-        variables: {id},
-    });
 
     const handleChange = e => {
         const {name, type, value} = e.target;
@@ -55,7 +55,7 @@ const UpdateItem = ({id}) => {
 
         const res = await updateItemMutation({
             variables: {
-                id,
+                id: id,
                 ...state,
             },
         });
@@ -63,7 +63,7 @@ const UpdateItem = ({id}) => {
     };
 
     if (loading) return <p>Loading...</p>;
-    if (!data.item) return <p>No Item Found for ID {id}</p>;
+    if (!data) return <p>No Item Found for ID { id }</p>;
 
     return (
         <div className={classes.root}>

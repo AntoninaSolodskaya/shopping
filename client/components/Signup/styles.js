@@ -21,13 +21,10 @@ export const styles = makeStyles(theme => ({
         position: "relative",
         zIndex: 2,
         transform: "skew(-9deg)",
-        margin: 20,
-    },
-    margin: {
-        margin: 10,
+        marginLeft: "2rem",
     },
     marginInput: {
-       marginTop: 20,
+        marginTop: 20,
     },
     inputWrap: {
         flexGrow: 1,
@@ -40,4 +37,9 @@ export const styles = makeStyles(theme => ({
         justifyContent: "space-between",
         margin: 20,
     },
+    loginLink: {
+        color: theme.palette.primary.main,
+        textDecoration: "none",
+        margin: 10,
+    }
 }));

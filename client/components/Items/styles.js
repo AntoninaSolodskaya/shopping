@@ -8,6 +8,9 @@ export const styles = makeStyles(theme => ({
     },
     itemWrap: {
         position: "relative",
-        margin: 20,
+    },
+    wrap: {
+        display: "flex",
+        justifyContent: "center",
     },
 }));

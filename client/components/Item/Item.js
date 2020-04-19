@@ -13,7 +13,7 @@ import formatMoney from '../../lib/formatMoney';
 import DeleteItem from "../DeleteItem/DeleteItem";
 
 
-const Item = ({item}) => {
+const Item = ({ item }) => {
     const classes = styles();
 
     const badge = item.amount === null;

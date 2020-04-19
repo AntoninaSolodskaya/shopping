@@ -1,6 +1,5 @@
 import UpdateItem from '../components/UpdateItem/UpdateItem';
-import { withRouter } from "next/router";
-
+import React from "react";
 
 const Sell = ({ query }) => (
     <div>
@@ -8,4 +7,4 @@ const Sell = ({ query }) => (
     </div>
 );
 
-export default withRouter(Sell);
+export default Sell;

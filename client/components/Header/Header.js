@@ -31,7 +31,6 @@ const Header = () => {
             </div>
             <div>
                 <p>Search </p>
-                <p>Cart </p>
             </div>
         </>
     );

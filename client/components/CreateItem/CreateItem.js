@@ -1,9 +1,10 @@
 import React from "react";
 import gql from 'graphql-tag';
-import {useMutation} from '@apollo/react-hooks';
+import { useMutation } from '@apollo/react-hooks';
 import Router from 'next/router';
 import { Formik, Field, Form } from "formik";
 import { TextField } from "formik-material-ui";
+import { Select } from "material-ui-formik-components/Select";
 import * as Yup from "yup";
 import Paper from "@material-ui/core/Paper";
 import Button from "@material-ui/core/Button";
@@ -22,6 +23,7 @@ const CREATE_ITEM_MUTATION = gql`
         $image: String
         $largeImage: String
         $amount: Int
+        $category: String
     ) {
         createItem(
             title: $title
@@ -30,6 +32,7 @@ const CREATE_ITEM_MUTATION = gql`
             image: $image
             largeImage: $largeImage
             amount: $amount
+            category: $category
         ) {
             id
         }
@@ -53,6 +56,7 @@ const CreateItem = () => {
                         description: "",
                         price: "",
                         amount: "",
+                        category: "",
                         file: [],
                     }}
                     validationSchema={Yup.object().shape({
@@ -61,6 +65,8 @@ const CreateItem = () => {
                         price: Yup.string().required("Price is required"),
                         amount: Yup.string().required("Amount is required"),
                         //TODO validate image
+                        //TODO disabled submit button when image do not upload
+                        //TODO styled input file
                     })}
                     onSubmit={async (values, {resetForm}) => {
                         const res = await createItem({
@@ -136,6 +142,17 @@ const CreateItem = () => {
                                     component={TextField}
                                     margin="normal"
                                     fullWidth
+                                />
+
+                                <Field
+                                    name="category"
+                                    label="Product Category"
+                                    options={[
+                                        { value: "Man", label: "Man" },
+                                        { value: "Women", label: "Women" },
+                                        { value: "Kids", label: "Kids" }
+                                    ]}
+                                    component={Select}
                                 />
                                 <Field
                                     label="Upload image"

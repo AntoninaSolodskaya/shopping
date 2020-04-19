@@ -21,4 +21,10 @@ export const styles = makeStyles(theme => ({
         fontFamily: "Roboto",
         textTransform: "uppercase",
     },
+    box: {
+        display: "flex",
+    },
+    margin: {
+        marginRight: 10,
+    },
 }));
