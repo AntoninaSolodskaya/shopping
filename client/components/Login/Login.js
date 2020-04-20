@@ -10,6 +10,7 @@ import {TextField} from "formik-material-ui";
 import Typography from "@material-ui/core/Typography";
 import Paper from "@material-ui/core/Paper";
 import Button from "@material-ui/core/Button";
+import Box from "@material-ui/core/Box";
 
 import Error from "../ErrorMessage";
 import Progress from "../Progress/Progress";
@@ -40,7 +41,7 @@ const Login = () => {
                     }}
                     validationSchema={Yup.object().shape({
                         email: Yup.string()
-                            .email("Email is invalidd")
+                            .email("Email is invalid")
                             .required("Email is required"),
                         password: Yup.string()
                             .min(8, "Password must contain at least 8 characters")
@@ -95,15 +96,26 @@ const Login = () => {
                                         Sign In
                                     </Button>
                                 </div>
-                                <Typography align="right">You dont have an account?
-                                    <Link
-                                        href={{
-                                            pathname: '/',
-                                        }}
-                                    >
-                                        <a className={classes.loginLink}>SignUp</a>
-                                    </Link>
-                                </Typography>
+                                <Box className={classes.btnWrap}>
+                                    <Typography>Forgot a password?
+                                        <Link
+                                            href={{
+                                                pathname: '/reset',
+                                            }}
+                                        >
+                                            <a className={classes.loginLink}>Click here</a>
+                                        </Link>
+                                    </Typography>
+                                    <Typography>You dont have an account?
+                                        <Link
+                                            href={{
+                                                pathname: '/',
+                                            }}
+                                        >
+                                            <a className={classes.loginLink}>SignUp</a>
+                                        </Link>
+                                    </Typography>
+                                </Box>
                             </Form>
                         )
                     }}

@@ -23,9 +23,12 @@
   },
   "dependencies": {
     "bcryptjs": "^2.4.3",
+    "crypto": "^1.0.1",
     "dotenv": "^8.2.0",
     "graphql-yoga": "^1.18.3",
+    "nodemailer": "^6.4.6",
     "nodemon": "^2.0.3",
-    "prisma-binding": "^2.3.16"
+    "prisma-binding": "^2.3.16",
+    "util": "^0.12.2"
   }
 }

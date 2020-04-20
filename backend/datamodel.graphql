@@ -27,4 +27,5 @@ type Item {
   price: Int!
   amount: Int
   category: String
+  user: User
 }

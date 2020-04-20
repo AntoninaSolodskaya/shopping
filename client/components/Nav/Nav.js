@@ -1,7 +1,7 @@
-import React from 'react';
+import React, {useEffect, useState} from 'react';
 import Link from "next/link";
 import gql from "graphql-tag";
-import {useQuery, useMutation} from "@apollo/react-hooks";
+import {useMutation, useQuery} from "@apollo/react-hooks";
 
 import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
@@ -11,6 +11,14 @@ import Button from "@material-ui/core/Button";
 import Box from "@material-ui/core/Box";
 
 import {styles} from "./styles";
+
+const SIGN_OUT_MUTATION = gql`
+  mutation SIGN_OUT_MUTATION {
+    signOut {
+      message
+    }
+  }
+`;
 
 const CURRENT_USER_QUERY = gql`
     query {
@@ -23,20 +31,16 @@ const CURRENT_USER_QUERY = gql`
     }
 `;
 
-const SIGN_OUT_MUTATION = gql`
-  mutation SIGN_OUT_MUTATION {
-    signOut {
-      message
-    }
-  }
-`;
-
 const Nav = () => {
     const classes = styles();
-    const {data} = useQuery(CURRENT_USER_QUERY);
+
     const [signOut] = useMutation(SIGN_OUT_MUTATION, {
         refetchQueries: [{ query: CURRENT_USER_QUERY }]
     });
+
+    const { data, loading, error } = useQuery(CURRENT_USER_QUERY);
+    if (loading) return <span>Loading...</span>
+    if (error) return <span>Error loading</span>
 
     return (
         <div className={classes.root}>
@@ -45,7 +49,12 @@ const Nav = () => {
                     <Link href="/items">
                         <a className={classes.title}>Items</a>
                     </Link>
-                    {data ? (
+                    {!data.user && (
+                        <Link href="/signup">
+                            <a className={classes.title}>Signup</a>
+                        </Link>
+                    )}
+                    {data.user && (
                         <>
                             <Link href="/sell">
                                 <a className={classes.title}>Sell</a>
@@ -57,19 +66,13 @@ const Nav = () => {
                                 <a className={classes.title}>Account</a>
                             </Link>
 
-                            {/*{data.user.name && data.user.name ? (*/}
-                            {/*    <Box className={classes.box}>*/}
-                            {/*        <AccountCircleIcon className={classes.margin}/>*/}
-                            {/*        <Typography>{data.user.name}</Typography>*/}
-                            {/*    </Box>*/}
-                            {/*) : (<div></div>)}*/}
+                            <Box className={classes.box}>
+                                <AccountCircleIcon className={classes.margin}/>
+                                <Typography>{data.user.name}</Typography>
+                            </Box>
 
-                            <Button onClick={signout => signOut(signout)}>Logout</Button>
+                            <Button variant="contained" color="primary" disableElevation onClick={signout => signOut(signout)}>Logout</Button>
                         </>
-                    ) : (
-                        <Link href="/signup">
-                            <a className={classes.title}>Signup</a>
-                        </Link>
                     )}
                 </Toolbar>
             </AppBar>
