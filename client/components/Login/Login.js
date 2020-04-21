@@ -100,7 +100,7 @@ const Login = () => {
                                     <Typography>Forgot a password?
                                         <Link
                                             href={{
-                                                pathname: '/reset',
+                                                pathname: '/request',
                                             }}
                                         >
                                             <a className={classes.loginLink}>Click here</a>

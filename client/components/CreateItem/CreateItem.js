@@ -14,6 +14,7 @@ import Box from "@material-ui/core/Box";
 import {styles} from "./styles";
 import Error from '../ErrorMessage';
 import Progress from "../Progress/Progress";
+import { ALL_ITEMS_QUERY } from "../Items/Items";
 
 const CREATE_ITEM_MUTATION = gql`
     mutation CREATE_ITEM_MUTATION(
@@ -74,6 +75,11 @@ const CreateItem = () => {
                                 ...values,
                                 image: state.image,
                                 largeImage: state.largeImage,
+                            },
+                            update: (cache, { data: { createItem } }) => {
+                                const data = cache.readQuery({ query: ALL_ITEMS_QUERY });
+                                data.items = [...data.items, createItem];
+                                cache.writeQuery({ query: ALL_ITEMS_QUERY, data });
                             }
                         });
 

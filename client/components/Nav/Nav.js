@@ -62,7 +62,7 @@ const Nav = () => {
                             <Link href="/orders">
                                 <a className={classes.title}>Orders</a>
                             </Link>
-                            <Link href="/me">
+                            <Link href="/permissions">
                                 <a className={classes.title}>Account</a>
                             </Link>
 

@@ -33,6 +33,7 @@ const Items = ({ page }) => {
 
     if (loading) return 'Loading...';
     if (error) return `Error! ${error.message}`;
+    //TODO refetch cache of items
     return (
         <div className={classes.root}>
             <Grid container spacing={3} className={classes.wrap}>

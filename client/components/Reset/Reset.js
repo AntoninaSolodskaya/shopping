@@ -58,11 +58,12 @@ console.log(resetToken)
                         });
 
                         resetForm();
-                        // await Router.push({
-                        //     pathname: '/',
-                        // });
+                        await Router.push({
+                            pathname: '/',
+                        });
 
-                        //TODO disable reset button
+                        //TODO disable submit button
+                        //TODO change text of token
                     }}>
                     {({values}) => {
                         return (
@@ -89,13 +90,6 @@ console.log(resetToken)
                                     fullWidth
                                 />
                                 <div className={classes.btnWrap}>
-                                    <Button
-                                        type="reset"
-                                        variant="contained"
-                                        color="secondary"
-                                    >
-                                        Reset
-                                    </Button>
                                     <Button type="submit" variant="contained" color="primary" disabled={values.password === ""} >
                                         Reset your password
                                     </Button>

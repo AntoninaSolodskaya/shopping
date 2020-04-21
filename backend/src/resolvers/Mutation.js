@@ -2,7 +2,7 @@ const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
 const { randomBytes } = require('crypto');
 const { promisify } = require('util');
-const { transport, makeANiceEmail } = require('../mail');
+const { transport, makeEmail } = require('../mail');
 
 const Mutations = {
     async createItem(parent, args, ctx, info) {
@@ -113,7 +113,7 @@ const Mutations = {
         // 2. Set a reset token and expiry on that user
         const randomBytesPromiseified = promisify(randomBytes);
         const resetToken = (await randomBytesPromiseified(20)).toString('hex');
-        const resetTokenExpiry = Date.now() + 3600000; // 1 hour from now
+        const resetTokenExpiry = (Date.now() + 3600000).toString(); // 1 hour from now
         const res = await ctx.db.mutation.updateUser({
             where: { email: args.email },
             data: { resetToken, resetTokenExpiry },
@@ -123,7 +123,7 @@ const Mutations = {
             from: 'mailstonya@gmail.com',
             to: user.email,
             subject: 'Your Password Reset Token',
-            html: makeANiceEmail(`Your Password Reset Token is here!
+            html: makeEmail(`Your Password Reset Token is here!
       \n\n
       <a href="${process.env
                 .FRONTEND_URL}/reset?resetToken=${resetToken}">Click Here to Reset</a>`),
@@ -142,7 +142,7 @@ const Mutations = {
         const [user] = await ctx.db.query.users({
             where: {
                 resetToken: args.resetToken,
-                resetTokenExpiry_gte: Date.now() - 3600000,
+                resetTokenExpiry_gte: (Date.now() - 3600000).toString(),
             },
         });
         if (!user) {
