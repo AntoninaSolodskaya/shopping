@@ -18,4 +18,11 @@ export const styles = makeStyles(theme => ({
     table: {
         minWidth: 650,
     },
+    btn: {
+        backgroundColor: "#32CD32",
+        color: "#ffffff",
+        '&:hover': {
+            backgroundColor: "#3CB371",
+        }
+    },
 }));
