@@ -11,7 +11,7 @@ import Paper from "@material-ui/core/Paper";
 import {styles} from "./styles";
 import formatMoney from '../../lib/formatMoney';
 import DeleteItem from "../DeleteItem/DeleteItem";
-
+import AddToCart from "../AddToCart";
 
 const Item = ({ item }) => {
     const classes = styles();
@@ -49,9 +49,7 @@ const Item = ({ item }) => {
                         <a className={classes.styleLink}>Edit</a>
                     </Link>
                 </Button>
-                <Button size="small" color="primary">
-                    Add To Cart
-                </Button>
+                <AddToCart id={item.id}/>
                 <DeleteItem id={item.id} />
             </CardActions>
         </Paper>

@@ -19,6 +19,7 @@ const ALL_ITEMS_QUERY = gql`
             image
             largeImage
             amount
+            category
         }
     }
 `;

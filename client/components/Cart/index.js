@@ -1,7 +1,7 @@
 import { withStyles } from "@material-ui/core/styles";
 
-import { Logout } from "./Logout";
+import { Cart } from "./Cart";
 
 import { styles } from "./styles";
 
-export default withStyles(styles)(Logout);
+export default withStyles(styles)(Cart);

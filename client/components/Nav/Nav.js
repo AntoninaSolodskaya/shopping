@@ -11,6 +11,8 @@ import Button from "@material-ui/core/Button";
 import Box from "@material-ui/core/Box";
 
 import {styles} from "./styles";
+import Cart from "../Cart/Cart";
+import SortItems from "../SortItems/SortItems";
 
 const SIGN_OUT_MUTATION = gql`
   mutation SIGN_OUT_MUTATION {
@@ -27,6 +29,19 @@ const CURRENT_USER_QUERY = gql`
             email
             name
             permissions
+            cart {
+                id
+                quantity
+                item {
+                    id
+                    price
+                    image
+                    title
+                    description
+                    amount
+                    category
+                }
+            }
         }
     }
 `;
@@ -56,6 +71,7 @@ const Nav = () => {
                     )}
                     {data.user && (
                         <>
+                            <SortItems />
                             <Link href="/sell">
                                 <a className={classes.title}>Sell</a>
                             </Link>
@@ -72,6 +88,7 @@ const Nav = () => {
                             </Box>
 
                             <Button variant="contained" color="primary" disableElevation onClick={signout => signOut(signout)}>Logout</Button>
+                            <Cart user={data.user}/>
                         </>
                     )}
                 </Toolbar>
