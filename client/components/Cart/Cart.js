@@ -7,15 +7,14 @@ import Divider from "@material-ui/core/Divider";
 import SwipeableDrawer from "@material-ui/core/SwipeableDrawer";
 import Typography from "@material-ui/core/Typography";
 import Box from "@material-ui/core/Box";
-import IconButton from "@material-ui/core/IconButton";
 import Badge from "@material-ui/core/Badge";
+import ShoppingCartIcon from '@material-ui/icons/ShoppingCart';
 
 import { styles } from "./styles";
 import CartItem from "../CartItem/CartItem";
 import formatMoney from "../../lib/formatMoney";
 import calcTotalPrice from "../../lib/calcToPrice";
-import ShoppingCartIcon from '@material-ui/icons/ShoppingCart';
-
+import Checkout from "../Checkout/Checkout";
 
 const LOCAL_STATE_QUERY = gql`
     query {
@@ -62,9 +61,11 @@ const Cart = ({ user }) => {
                 <Typography variant="h6" align="center" className={classes.title}>
                     {formatMoney(calcTotalPrice(user.cart))}
                 </Typography>
-                <Box className={classes.btn}>
-                    <Button color="primary" variant="contained">Checkout</Button>
-                </Box>
+                <div>
+                {user.cart.length && (
+                    <Checkout />    
+                )} 
+                </div>
             </Box>
         </div>
     );

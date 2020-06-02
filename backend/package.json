@@ -29,6 +29,7 @@
     "nodemailer": "^6.4.6",
     "nodemon": "^2.0.3",
     "prisma-binding": "^2.3.16",
+    "stripe": "^6.12.1",
     "util": "^0.12.2"
   }
 }

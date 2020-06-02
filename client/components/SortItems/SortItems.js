@@ -9,8 +9,8 @@ import { useQuery } from "@apollo/react-hooks";
 
 const SortItems = () => {
     const [anchorEl, setAnchorEl] = React.useState(null);
-    const {data: {items}, loading, error } = useQuery(ALL_ITEMS_QUERY);
-    console.log(items);
+    // const {data: {items}, loading, error } = useQuery(ALL_ITEMS_QUERY);
+    // console.log(items);
     const handleClick = (event) => {
         setAnchorEl(event.currentTarget);
     };
@@ -31,7 +31,7 @@ const SortItems = () => {
                 open={Boolean(anchorEl)}
                 onClose={handleClose}
             >
-                {items.map(item => <MenuItem key={item.id} onClick={handleClose}>{item.category}</MenuItem>)}
+                {/*{items.map(item => <MenuItem key={item.id} onClick={handleClose}>{item.category}</MenuItem>)}*/}
             </Menu>
         </div>
     )
